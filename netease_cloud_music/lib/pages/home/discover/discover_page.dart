@@ -1,6 +1,7 @@
 import 'package:common_utils/common_utils.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:netease_cloud_music/application.dart';
+import 'package:netease_cloud_music/provider/play_songs_model.dart';
 import 'package:netease_cloud_music/utils/utils.dart';
 import 'package:netease_cloud_music/widgets/common_text_style.dart';
 import 'package:netease_cloud_music/model/album.dart';
@@ -15,6 +16,7 @@ import 'package:netease_cloud_music/widgets/widget_banner.dart';
 import 'package:netease_cloud_music/widgets/widget_future_builder.dart';
 import 'package:netease_cloud_music/widgets/widget_play_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -30,7 +32,7 @@ class _HomePrePageState extends State<DiscoverPage>
     return CustomFutureBuilder<prefix0.Banner>(
       futureFunc: NetUtils.getBannerData,
       builder: (context, data) {
-        return CustomBanner(data.banners.map((e) => e.pic).toList());
+        return CustomBanner(data.banners.map((e) => '${e.pic}?param=540y210').toList());
       },
     );
   }
@@ -206,7 +208,7 @@ class _HomePrePageState extends State<DiscoverPage>
                     borderRadius:
                     BorderRadius.all(Radius.circular(8)),
                     child: Utils.showNetImage(
-                      data[index].cover,
+                      '${data[index].cover}?param=350&197',
                     ),
                   ),
                   VEmptyView(5),

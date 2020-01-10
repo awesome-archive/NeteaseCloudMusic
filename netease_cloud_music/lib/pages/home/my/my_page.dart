@@ -13,7 +13,6 @@ import 'package:netease_cloud_music/utils/utils.dart';
 import 'package:netease_cloud_music/widgets/common_text_style.dart';
 import 'package:netease_cloud_music/widgets/rounded_net_image.dart';
 import 'package:netease_cloud_music/widgets/widget_create_play_list.dart';
-import 'package:netease_cloud_music/widgets/widget_future_builder.dart';
 import 'package:netease_cloud_music/widgets/widget_play_list_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -41,8 +40,10 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
     super.initState();
     topMenuKeys = topMenuData.keys.toList();
     WidgetsBinding.instance.addPostFrameCallback((d){
-      _playListModel = Provider.of<PlayListModel>(context);
-      _playListModel.getSelfPlaylistData(context);
+      if(mounted) {
+        _playListModel = Provider.of<PlayListModel>(context);
+        _playListModel.getSelfPlaylistData(context);
+      }
     });
   }
 
@@ -101,7 +102,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
             onTap: () {
               NavigatorUtil.goPlayListPage(context,
                   data: Recommend(
-                      picUrl: curPlayList.coverImgUrl,
+                      picUrl: '${curPlayList.coverImgUrl}?param=150y150',
                       name: curPlayList.name,
                       playcount: curPlayList.playCount,
                       id: curPlayList.id));
@@ -116,7 +117,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
               style: smallGrayTextStyle,
             ),
             leading: RoundedNetImage(
-              curPlayList.coverImgUrl,
+              '${curPlayList.coverImgUrl}?param=150y150',
               width: 110,
               height: 110,
               radius: ScreenUtil().setWidth(12),

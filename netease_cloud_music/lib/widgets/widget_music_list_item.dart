@@ -26,11 +26,13 @@ class WidgetMusicListItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            HEmptyView(15),
+            _data.index == null && _data.picUrl == null
+                ? Container()
+                : HEmptyView(15),
             _data.picUrl == null
                 ? Container()
                 : RoundedNetImage(
-                    _data.picUrl,
+                    '${_data.picUrl}?param=150y150',
                     width: 100,
                     height: 100,
                     radius: 5,
@@ -46,7 +48,9 @@ class WidgetMusicListItem extends StatelessWidget {
                       style: mGrayTextStyle,
                     ),
                   ),
-            HEmptyView(10),
+            _data.index == null && _data.picUrl == null
+                ? Container()
+                : HEmptyView(10),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

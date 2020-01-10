@@ -16,15 +16,14 @@ void main() {
   Router router = Router();
   Routes.configureRoutes(router);
   Application.router = router;
-  NetUtils.init();
   Application.setupLocator();
   LogUtil.init(tag: 'NETEASE_MUSIC');
 //  AudioPlayer.logEnabled = true;
   Provider.debugCheckInvalidValueType = null;
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider<UserModel>.value(
-        value: UserModel(),
+      ChangeNotifierProvider<UserModel>(
+        builder: (_) => UserModel(),
       ),
       ChangeNotifierProvider<PlaySongsModel>(
         builder: (_) => PlaySongsModel()..init(),
